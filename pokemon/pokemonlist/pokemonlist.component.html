@@ -1,0 +1,47 @@
+<div class="card">
+    <div class="card-body text-primary">
+        <h1 class="mt-2 text-primary mb-2">List Pokemon</h1>
+        <p class="lead text-black-50 ">This page displays a SIMPLE list of pokemon from a request made to https://pokeapi.co/.
+            <p>Per page shows only 30 pokemon</p>
+
+        <nav class="navbar">
+        <form class="d-flex mb-2" role="search">
+            <input class="form-control" type="text" placeholder="Buscar Pokemon" aria-label="Search"
+            #txtSearch (keyup)="onSearchPokemon(txtSearch.value)"
+            />
+        </form>
+        </nav>
+
+
+        <button class="btn btn-primary" (click)="prevPage()">Back</button>
+        &nbsp;
+        <button class="btn btn-primary" (click)="nextPage()" 
+                [disabled]="(pokemons | filtro: page: search).length === 0">
+                Next</button>
+        <hr>
+
+    <table class="table table-bordered table-hover mb-3">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>NAME</th>
+                <th>PICTURE</th>
+                
+            </tr>
+        </thead>
+    <tbody>
+        <tr *ngFor="let poke of pokemons | filtro: page: search ">
+            <th>{{ poke.id }}</th>
+            <th>{{poke.name}}</th>
+            <th>
+                <img 
+                [src]="poke.pic"
+                [alt]="poke.name"
+                [ngStyle]="{'width': '70px'}"
+                />
+            </th>
+        </tr>
+    </tbody>
+</table>
+</div>
+</div>
